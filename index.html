@@ -49,7 +49,7 @@ footer{background:#111827;color:#cbd5e1;padding:35px 20px;margin-top:30px}.foot{
 
 <section id="detail" class="page"><div class="detail"><button class="back" onclick="showPage('catalog')">← Retour aux véhicules</button><div class="detail-grid"><div class="gallery">🚘</div><div class="panel"><span class="tag">VÉHICULE DISPONIBLE</span><h1 id="detailTitle">Peugeot 3008 GT</h1><div class="bigprice" id="detailPrice">19 490 €</div><p class="muted">2020 • 82 500 km • Diesel • Automatique</p><div class="notice">✓ Nous gérons votre demande et organisons le rendez-vous avec le propriétaire.</div><h3>Vous êtes intéressé ?</h3><p class="muted">Laissez-nous vos coordonnées. Un conseiller vous rappelle rapidement.</p><button class="primary full" onclick="openLead()">📞 Être rappelé</button><button class="ghost full" onclick="openLead('rdv')">📅 Demander un rendez-vous</button><button class="ghost full" onclick="openLead('question')">💬 Poser une question</button></div></div></div></section>
 
-<section id="sell" class="page"><div class="form-page"><div class="section-head"><div><div class="eyebrow">Vendre</div><h2>Déposez votre voiture</h2><p class="muted">Nous recevons votre demande, vérifions les informations puis vous contactons.</p></div></div><div class="form-card"><div class="form-grid"><div class="field"><label>MARQUE *</label><input placeholder="Peugeot"></div><div class="field"><label>MODÈLE *</label><input placeholder="3008"></div><div class="field"><label>ANNÉE *</label><input type="number" placeholder="2020"></div><div class="field"><label>KILOMÉTRAGE *</label><input placeholder="82 500"></div><div class="field"><label>PRIX SOUHAITÉ *</label><input placeholder="19 490 €"></div><div class="field"><label>ÉNERGIE *</label><select><option>Diesel</option><option>Essence</option><option>Hybride</option><option>Électrique</option></select></div><div class="field"><label>BOÎTE *</label><select><option>Automatique</option><option>Manuelle</option></select></div><div class="field"><label>VILLE *</label><input placeholder="Avignon"></div><div class="field fullcol"><label>DESCRIPTION</label><textarea rows="4" placeholder="Entretien, options, état, défauts..."></textarea></div><div class="field fullcol"><label>PHOTOS</label><input type="file" multiple accept="image/*"></div><div class="field"><label>PRÉNOM *</label><input placeholder="Jean"></div><div class="field"><label>NOM *</label><input placeholder="Dupont"></div><div class="field"><label>TÉLÉPHONE *</label><input placeholder="06 00 00 00 00"></div><div class="field"><label>E-MAIL *</label><input type="email" placeholder="jean@email.fr"></div><div class="fullcol"><label><input type="checkbox"> J'accepte d'être contacté concernant cette demande.</label></div></div><button class="primary full" onclick="toast('Demande envoyée — elle apparaît maintenant dans votre espace gestion.')">Envoyer mon véhicule</button></div></div></section>
+<section id="sell" class="page"><div class="form-page"><div class="section-head"><div><div class="eyebrow">Vendre</div><h2>Déposez votre voiture</h2><p class="muted">Votre demande sera enregistrée dans AUTORELAIS puis examinée avant publication.</p></div></div><div class="form-card"><div class="form-grid"><div class="field"><label>MARQUE *</label><input id="sellMarque" placeholder="Peugeot" required></div><div class="field"><label>MODÈLE *</label><input id="sellModele" placeholder="3008" required></div><div class="field"><label>ANNÉE *</label><input id="sellAnnee" type="number" placeholder="2020" required></div><div class="field"><label>KILOMÉTRAGE *</label><input id="sellKm" inputmode="numeric" placeholder="82 500" required></div><div class="field"><label>PRIX SOUHAITÉ *</label><input id="sellPrix" inputmode="numeric" placeholder="19 490 €" required></div><div class="field"><label>ÉNERGIE *</label><select id="sellEnergie"><option>Diesel</option><option>Essence</option><option>Hybride</option><option>Électrique</option></select></div><div class="field"><label>BOÎTE *</label><select id="sellBoite"><option>Automatique</option><option>Manuelle</option></select></div><div class="field"><label>VILLE *</label><input id="sellVille" placeholder="Avignon" required></div><div class="field fullcol"><label>IMMATRICULATION</label><input id="sellImmat" placeholder="AA-123-BB"></div><div class="field fullcol"><label>DESCRIPTION</label><textarea id="sellDescription" rows="4" placeholder="Entretien, options, état, défauts..."></textarea></div><div class="field fullcol"><label>PHOTOS</label><input type="file" disabled><span class="muted" style="font-size:12px">L'ajout de photos sera activé à l'étape suivante.</span></div><div class="field"><label>PRÉNOM *</label><input id="sellPrenom" placeholder="Jean" required></div><div class="field"><label>NOM *</label><input id="sellNom" placeholder="Dupont" required></div><div class="field"><label>TÉLÉPHONE *</label><input id="sellTelephone" placeholder="06 00 00 00 00" required></div><div class="field"><label>E-MAIL *</label><input id="sellEmail" type="email" placeholder="jean@email.fr" required></div><div class="fullcol"><label><input id="sellConsent" type="checkbox"> J'accepte d'être contacté concernant cette demande.</label></div></div><button id="sellSubmit" class="primary full" onclick="submitSeller()">Envoyer mon véhicule</button></div></div></section>
 
 <section id="how" class="page"><div class="wrap"><div class="section-head"><div><div class="eyebrow">AUTORELAIS</div><h2>Un accompagnement de A à Z</h2></div></div><div class="steps"><div class="step"><div class="num">1</div><h3>Dépôt</h3><p class="muted">Le propriétaire renseigne son véhicule et ses coordonnées.</p></div><div class="step"><div class="num">2</div><h3>Validation</h3><p class="muted">Tu vérifies l'annonce avant sa publication.</p></div><div class="step"><div class="num">3</div><h3>Prospection</h3><p class="muted">Les acheteurs découvrent le véhicule et envoient leurs demandes.</p></div><div class="step"><div class="num">4</div><h3>Rendez-vous</h3><p class="muted">Tu qualifies le prospect et organises la rencontre.</p></div></div></div></section>
 
@@ -70,6 +70,40 @@ function showDetail(title,price){document.getElementById('detailTitle').textCont
 function openLead(type){document.getElementById('modalText').textContent=type==='rdv'?'Indiquez vos coordonnées pour demander un rendez-vous avec le propriétaire.':type==='question'?'Posez votre question et notre équipe vous répondra.':'Laissez vos coordonnées et nous vous rappelons rapidement.';document.getElementById('modal').classList.add('show')}
 function closeModal(){document.getElementById('modal').classList.remove('show')}
 function submitLead(){closeModal();toast('Merci ! Votre demande a bien été envoyée.')}
+
+async function submitSeller(){
+  const btn=document.getElementById('sellSubmit');
+  const val=id=>document.getElementById(id).value.trim();
+  const payload={
+    marque:val('sellMarque'), modele:val('sellModele'),
+    annee:Number(val('sellAnnee')), kilometrage:Number(val('sellKm').replace(/\D/g,'')),
+    prix_souhaite:Number(val('sellPrix').replace(/\D/g,'')),
+    energie:val('sellEnergie'), boite:val('sellBoite'), ville:val('sellVille'),
+    immatriculation:val('sellImmat'), description:val('sellDescription'),
+    prenom:val('sellPrenom'), nom:val('sellNom'),
+    telephone:val('sellTelephone'), email:val('sellEmail')
+  };
+  if(!payload.marque||!payload.modele||!payload.annee||!payload.kilometrage||!payload.prix_souhaite||!payload.ville||!payload.prenom||!payload.nom||!payload.telephone||!payload.email){
+    toast('Merci de remplir tous les champs obligatoires.'); return;
+  }
+  if(!document.getElementById('sellConsent').checked){
+    toast('Merci d’accepter d’être contacté concernant cette demande.'); return;
+  }
+  btn.disabled=true; btn.textContent='Envoi en cours…';
+  try{
+    const r=await fetch('/api/vendeur',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const data=await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(data.error||'Erreur serveur');
+    toast('Demande enregistrée avec succès. Nous vous recontactons rapidement.');
+    ['sellMarque','sellModele','sellAnnee','sellKm','sellPrix','sellVille','sellImmat','sellDescription','sellPrenom','sellNom','sellTelephone','sellEmail'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('sellConsent').checked=false;
+  }catch(e){
+    toast('Impossible d’enregistrer la demande pour le moment. Réessayez.');
+  }finally{
+    btn.disabled=false; btn.textContent='Envoyer mon véhicule';
+  }
+}
+
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
 </script>
 </body>
