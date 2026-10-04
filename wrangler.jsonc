@@ -1,1 +1,19 @@
-
+{
+  "name": "autorelais",
+  "main": "worker.js",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/api/*"
+    ]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "autorelais-db",
+      "database_id": "c97b978b-2512-4f5f-9d97-874cb97b110b"
+    }
+  ]
+}
